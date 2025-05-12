@@ -298,7 +298,7 @@ impl<I, S, SM> Mutator<I, S> for LoggerScheduledMutator<SM>
 where
     S: HasRand + HasCorpus<I>,
     SM: ScheduledMutator<I, S>,
-    SM::Mutations: MutatorsTuple<I, S> + NamedTuple,
+    SM::Mutations: MutatorsTuple<I, S> + NamedTuple + HasConstLen,
 {
     fn mutate(&mut self, state: &mut S, input: &mut I) -> Result<MutationResult, Error> {
         self.scheduled_mutate(state, input)
@@ -341,7 +341,7 @@ impl<I, S, SM> ScheduledMutator<I, S> for LoggerScheduledMutator<SM>
 where
     S: HasRand + HasCorpus<I>,
     SM: ScheduledMutator<I, S>,
-    SM::Mutations: MutatorsTuple<I, S> + NamedTuple,
+    SM::Mutations: MutatorsTuple<I, S> + NamedTuple + HasConstLen,
 {
     /// Compute the number of iterations used to apply stacked mutations
     fn iterations(&self, state: &mut S, _: &I) -> u64 {
